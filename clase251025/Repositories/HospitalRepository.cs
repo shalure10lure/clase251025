@@ -26,5 +26,28 @@ namespace clase251025.Repositories
         {
             return await _db.Hospitals.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task Delete(Guid id)
+        {
+            var hospital = await _db.Hospitals.FirstOrDefaultAsync(x => x.Id == id);
+            if (hospital != null)
+            {
+                _db.Hospitals.Remove(hospital);
+                await _db.SaveChangesAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Hospital>> GetAllByType(int type)
+        {
+            return await _db.Hospitals
+             .Where(x => x.Type == type)
+             .ToListAsync();
+        }
+
+        public async Task Update(Hospital hospital)
+        {
+            _db.Hospitals.Update(hospital);
+            await _db.SaveChangesAsync();
+        }
     }
 }
