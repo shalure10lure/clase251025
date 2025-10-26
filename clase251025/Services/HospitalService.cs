@@ -34,6 +34,20 @@ namespace clase251025.Services
             return _repo.GetOne(id);
         }
 
+        public async Task<Hospital?> UpdateHospital(Guid id, UpdateHospitalDto dto)
+        {
+            var existing = await _repo.GetOne(id);
+            if (existing is null) return null;
+
+            // Actualizamos solo los campos que no son null
+            existing.Name = dto.Name?.Trim() ?? existing.Name;
+            existing.Address = dto.Address?.Trim() ?? existing.Address;
+            existing.Type = dto.Type ?? existing.Type;
+
+            await _repo.Update(existing);
+            return existing;
+        }
+
         public async Task DeleteHospital(Guid id)
         {
             await _repo.Delete(id);

@@ -9,7 +9,7 @@ namespace clase251025.Services
         Task<Hospital> GetOne(Guid id);
         Task<Hospital> CreateHospital(CreateHospitalDto dto);
 
-       // Task UpdateHospital(Hospital hospital);
+        Task<Hospital?> UpdateHospital( Guid id, UpdateHospitalDto dto);
         Task DeleteHospital(Guid id);
         Task<IEnumerable<Hospital>> GetAllType1And3();
 

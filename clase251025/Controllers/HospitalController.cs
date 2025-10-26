@@ -37,5 +37,33 @@ namespace clase251025.Controllers
             var hospital = await _service.CreateHospital(dto);
             return CreatedAtAction(nameof(GetOne), new { id = hospital.Id }, hospital);
         }
+        [HttpPut("{id:guid}")]
+        [Authorize] 
+        public async Task<IActionResult> UpdateHospital(Guid id, [FromBody] UpdateHospitalDto dto)
+        {
+            if (!ModelState.IsValid) return ValidationProblem(ModelState);
+
+            var updated = await _service.UpdateHospital(id, dto);
+            if (updated is null) return NotFound();
+
+            return Ok(updated); 
+        }
+
+        [HttpDelete("{id:guid}")]
+        [Authorize(Policy = "AdminOnly")]
+        public async Task<IActionResult> DeleteHospital(Guid id)
+        {
+            await _service.DeleteHospital(id);
+            return NoContent();
+        }
+
+        [HttpGet("public/type1and3")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetHospitalsType1And3()
+        {
+            var hospitals = await _service.GetAllType1And3();
+            return Ok(hospitals);
+        }
+
     }
 }
