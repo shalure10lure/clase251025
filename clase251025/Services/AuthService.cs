@@ -2,6 +2,8 @@
 using clase251025.Models.DTOs;
 using clase251025.Repositories;
 using System.Security.Claims;
+using System.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
@@ -11,15 +13,15 @@ namespace clase251025.Services
     public class AuthService : IAuthService
     {
         private readonly IUserRepository _users;
-        private readonly Iconfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
-        public AuthService(IUserRepository users, Iconfiguration configuration
+        public AuthService(IUserRepository users, IConfiguration configuration)
         {
             _users = users;
             _configuration = configuration;
         }
 
-        public async Task<bool, ok, string?, token> LoginAsync(LoginDto dto)
+        public async Task<(bool ok, string? token)> LoginAsync(LoginDto dto)
         {
             var user = await _users.GetByEmailAddress(dto.Email);
             if (user == null) return (false, null);
@@ -43,10 +45,11 @@ namespace clase251025.Services
             return user.Id.ToString();
         }
 
-        public Task<bool> VerifyCredentials(LoginDto dto)
+        public async Task<bool> VerifyCredentials(LoginDto dto)
         {
             var user = await _users.GetByEmailAddress(dto.Email);
-            return BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
+             
+             return BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
         }
 
         private string GenerateJwtToken(User user)

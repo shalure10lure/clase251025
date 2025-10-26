@@ -11,7 +11,7 @@ namespace clase251025.Services
         {
             _repo = repo;
         }
-        public Task<Hospital> CreateHospital(CreateHospitalDto dto)
+        public async Task<Hospital> CreateHospital(CreateHospitalDto dto)
         {
             var hospital = new Hospital
             {
