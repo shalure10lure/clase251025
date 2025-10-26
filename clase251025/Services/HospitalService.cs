@@ -33,5 +33,18 @@ namespace clase251025.Services
         {
             return _repo.GetOne(id);
         }
+
+        public async Task DeleteHospital(Guid id)
+        {
+            await _repo.Delete(id);
+        }
+
+        public async Task<IEnumerable<Hospital>> GetAllType1And3()
+        {
+            var type1 = await _repo.GetAllByType(1);
+            var type3 = await _repo.GetAllByType(3);
+
+            return type1.Concat(type3);
+        }
     }
 }
