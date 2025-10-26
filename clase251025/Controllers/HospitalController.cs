@@ -58,7 +58,6 @@ namespace clase251025.Controllers
         }
 
         [HttpGet("public/type1and3")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetHospitalsType1And3()
         {
             var hospitals = await _service.GetAllType1And3();
