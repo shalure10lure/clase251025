@@ -2,7 +2,7 @@
 
 namespace clase251025.Models.DTOs
 {
-    public class CreateHospitalDto
+    public record CreateHospitalDto
     {
         [Required]
         public Guid Id { get; init; }
