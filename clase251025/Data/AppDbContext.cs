@@ -10,6 +10,7 @@ namespace clase251025.Data
         {
         }
         public DbSet<User> Users => Set<User>();
+        public DbSet<Hospital> Hospitals => Set<Hospital>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
