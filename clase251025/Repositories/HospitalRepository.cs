@@ -1,4 +1,5 @@
-﻿using clase251025.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using clase251025.Data;
 using clase251025.Models;
 
 namespace clase251025.Repositories

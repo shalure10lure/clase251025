@@ -1,12 +1,13 @@
 ﻿using clase251025.Models;
 using clase251025.Models.DTOs;
+using clase251025.Repositories;
 
 namespace clase251025.Services
 {
     public class HospitalService : IHospitalService
     {
         private readonly IHospitalRepository _repo;
-        public HospitalService(IHospitalService repo)
+        public HospitalService(IHospitalRepository repo)
         {
             _repo = repo;
         }

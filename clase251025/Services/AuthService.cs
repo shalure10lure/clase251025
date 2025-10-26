@@ -1,7 +1,10 @@
 ﻿using clase251025.Models;
 using clase251025.Models.DTOs;
+using clase251025.Repositories;
 using System.Security.Claims;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace clase251025.Services
 {
